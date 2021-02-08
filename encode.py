@@ -18,11 +18,16 @@ probe = run(['ffprobe', '-print_format', 'json', '-show_streams', video],
             stdout=PIPE)
 
 info = json.loads(probe.stdout)
-bitrate = str(int(int(info['streams'][0]['bit_rate']) / 1000) + 100) + 'k'
+# max 5800k bitrate
+bitrate = str(
+    max(int(int(info['streams'][0]['bit_rate']) / 1000) + 100, 5800)) + 'k'
 f_out = '【已压】' + video
 out_name = os.path.join(os.path.expanduser('~'), 'Desktop', f_out)
-avs_content = r'LoadPlugin("C:\Program Files\aegisub-3.2.2-portable-32\csri\VSFilterMod.dll")' + 'DirectShowSource("' + video + '")' + 'TextSubMod(file="' + ass + '")'
-avs = open('encode.avs', 'w')
+# arguments -1, -1 is for vtrack and atrack, without it there is no audio in output
+avs_content = r'LoadPlugin("C:\Program Files (x86)\aegisub-3.2.2-portable-32\csri\VSFilterMod.dll")' + \
+    'FFMS2("' + video + '"' + ', -1, -1' + ')' + \
+    'TextSubMod(file="' + ass + '")'
+avs = open('encode.avs', 'w', encoding='utf8')
 avs.write(avs_content)
 avs.close()
 
