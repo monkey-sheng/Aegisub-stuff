@@ -24,15 +24,14 @@ bitrate = str(
 f_out = '【已压】' + video
 out_name = os.path.join(os.path.expanduser('~'), 'Desktop', f_out)
 # arguments -1, -1 is for vtrack and atrack, without it there is no audio in output
-avs_content = r'LoadPlugin("C:\Program Files (x86)\aegisub-3.2.2-portable-32\csri\VSFilterMod.dll")' + \
-    'FFMS2("' + video + '"' + ', -1, -1' + ')' + \
+avs_content = 'FFMS2("' + video + '"' + ', -1, -1' + ')' + \
     'TextSubMod(file="' + ass + '")'
 avs = open('encode.avs', 'w', encoding='utf8')
 avs.write(avs_content)
 avs.close()
 
 run([
-    'ffmpeg', '-i', 'encode.avs', '-pix_fmt', 'yuv420p', '-preset', 'slow',
-    '-b:v', bitrate, out_name
+    'ffmpeg', '-i', 'encode.avs', '-pix_fmt', 'yuv420p', '-c:v', 'h264_nvenc', '-profile', 'high', '-rc-lookahead', '16',
+    '-b_ref_mode', 'middle', '-b:v', bitrate, out_name
 ],
     shell=True)
