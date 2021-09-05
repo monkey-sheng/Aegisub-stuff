@@ -1,6 +1,5 @@
-import json
-from subprocess import run, PIPE
 from os import listdir
+from subprocess import run
 import os
 
 files = listdir()
@@ -14,24 +13,8 @@ if len(videos) == 0 or len(subs) == 0:
     exit(1)
 
 video, ass = videos[0], subs[0]
-probe = run(['ffprobe', '-print_format', 'json', '-show_streams', video],
-            stdout=PIPE)
-
-info = json.loads(probe.stdout)
-# max 5800k bitrate
-bitrate = str(
-    max(int(int(info['streams'][0]['bit_rate']) / 1000) + 100, 5800)) + 'k'
 f_out = '【已压】' + video
 out_name = os.path.join(os.path.expanduser('~'), 'Desktop', f_out)
-# arguments -1, -1 is for vtrack and atrack, without it there is no audio in output
-avs_content = 'FFMS2("' + video + '"' + ', -1, -1' + ')' + \
-    'TextSubMod(file="' + ass + '")'
-avs = open('encode.avs', 'w', encoding='utf8')
-avs.write(avs_content)
-avs.close()
-
-run([
-    'ffmpeg', '-i', 'encode.avs', '-pix_fmt', 'yuv420p', '-c:v', 'h264_nvenc', '-profile', 'high', '-rc-lookahead', '16',
-    '-b_ref_mode', 'middle', '-b:v', bitrate, out_name
-],
-    shell=True)
+print(out_name)
+run(['ffmpeg', '-hwaccel', 'cuda', '-i', video, '-pix_fmt', 'yuv420p', '-vf',
+     f'subtitles={ass}', '-c:a', 'copy', '-c:v', 'h264_nvenc', '-profile:v', 'high', '-level', '5.0', '-rc-lookahead', '12', '-bf', '4', '-b_ref_mode', 'middle', '-rc', 'vbr_hq', '-cq', '19', out_name])
