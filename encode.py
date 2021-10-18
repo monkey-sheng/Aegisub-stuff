@@ -16,5 +16,5 @@ video, ass = videos[0], subs[0]
 f_out = '【已压】' + video
 out_name = os.path.join(os.path.expanduser('~'), 'Desktop', f_out)
 print(out_name)
-run(['ffmpeg', '-hwaccel', 'cuda', '-i', video, '-pix_fmt', 'yuv420p', '-vf',
-     f'subtitles={ass}', '-c:a', 'copy', '-c:v', 'h264_nvenc', '-profile:v', 'high', '-level', '5.0', '-rc-lookahead', '12', '-bf', '4', '-b_ref_mode', 'middle', '-rc', 'vbr_hq', '-cq', '19', out_name])
+run(['ffmpeg', '-i', video, '-pix_fmt', 'yuv420p', '-vf',
+     f'subtitles={ass}', '-c:a', 'copy', '-profile:v', 'high', '-level', '5.0', '-crf', 19, out_name])
