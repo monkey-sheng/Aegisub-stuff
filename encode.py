@@ -17,4 +17,4 @@ f_out = '【已压】' + video
 out_name = os.path.join(os.path.expanduser('~'), 'Desktop', f_out)
 print(out_name)
 run(['ffmpeg', '-i', video, '-pix_fmt', 'yuv420p', '-vf',
-     f'subtitles={ass}', '-c:a', 'copy', '-profile:v', 'high', '-level', '5.0', '-crf', 19, out_name])
+     f'subtitles={ass}', '-c:a', 'copy', '-c:v', 'h264_nvenc', '-profile:v', 'high', '-level', '5.0', '-cq', 20, out_name])
