@@ -68,7 +68,7 @@
 		"Display Height" : 200,
 		"Downmixer" : "ConvertToMono",
 		"Drag Timing" : false,
-		"Inactive Lines Display Mode" : 1,
+		"Inactive Lines Display Mode" : 3,
 		"Karaoke" : {
 			"Font Face" : "Verdana",
 			"Font Size" : 9
@@ -88,8 +88,8 @@
 		"Renderer" : {
 			"Spectrum" : {
 				"Cutoff" : 0,
-				"Memory Max" : 1024,
-				"Quality" : 3
+				"Memory Max" : 512,
+				"Quality" : 1
 			}
 		},
 		"Snap" : {
@@ -104,13 +104,13 @@
 		"Volume" : 22,
 		"Wheel Default to Zoom" : false,
 		"Zoom" : {
-			"Horizontal" : 9,
-			"Vertical" : 70
+			"Horizontal" : 10,
+			"Vertical" : 51
 		}
 	},
 	"Automation" : {
 		"Autoreload Mode" : 1,
-		"Trace Level" : 1
+		"Trace Level" : 3
 	},
 	"Colour" : {
 		"Audio Display" : {
@@ -298,12 +298,12 @@
 			"Include" : "?user/automation/include/|?data/automation/include/"
 		},
 		"Dictionary" : "?user/dictionaries",
-		"Fonts Collector Destination" : "C:\\Users\\Jason\\Documents\\Tencent Files\\1092997224\\FileRecv",
+		"Fonts Collector Destination" : "?script",
 		"Last" : {
 			"Audio" : "",
 			"Automation" : "",
 			"Keyframes" : "",
-			"Subtitles" : "C:\\Users\\Jason\\Desktop\\轴",
+			"Subtitles" : "C:\\Users\\Jason Hu\\Desktop\\stt",
 			"Timecodes" : "",
 			"Video" : "D:\\QQ Files\\1092997224\\FileRecv"
 		},
@@ -433,83 +433,53 @@
 	"Tool" : {
 		"Colour Picker" : {
 			"Last" : {
-				"X" : 575,
-				"Y" : 187
+				"X" : -1,
+				"Y" : -1
 			},
 			"Maximized" : false,
 			"Mode" : 4,
 			"Recent Colours" : [
 				{
-					"color" : "rgb(252, 249, 246)"
+					"color" : "rgb(182, 108, 68)"
 				},
 				{
-					"color" : "rgb(84, 113, 133)"
+					"color" : "rgb(229, 115, 53)"
 				},
 				{
-					"color" : "rgb(255, 239, 170)"
+					"color" : "rgb(194, 211, 236)"
 				},
 				{
-					"color" : "rgb(249, 195, 182)"
+					"color" : "rgb(182, 198, 222)"
 				},
 				{
-					"color" : "rgb(151, 207, 167)"
+					"color" : "rgb(190, 197, 209)"
 				},
 				{
-					"color" : "rgb(132, 71, 192)"
+					"color" : "rgb(213, 213, 213)"
+				},
+				{
+					"color" : "rgb(167, 167, 167)"
+				},
+				{
+					"color" : "rgb(93, 5, 5)"
+				},
+				{
+					"color" : "rgb(231, 45, 197)"
+				},
+				{
+					"color" : "rgb(242, 86, 155)"
 				},
 				{
 					"color" : "rgb(0, 0, 0)"
-				},
-				{
-					"color" : "rgb(255, 255, 255)"
-				},
-				{
-					"color" : "rgb(105, 38, 20)"
-				},
-				{
-					"color" : "rgb(91, 91, 91)"
-				},
-				{
-					"color" : "rgb(50, 176, 229)"
-				},
-				{
-					"color" : "rgb(239, 211, 80)"
-				},
-				{
-					"color" : "rgb(243, 119, 54)"
-				},
-				{
-					"color" : "rgb(203, 15, 47)"
-				},
-				{
-					"color" : "rgb(217, 21, 0)"
-				},
-				{
-					"color" : "rgb(0, 0, 148)"
-				},
-				{
-					"color" : "rgb(183, 1, 0)"
-				},
-				{
-					"color" : "rgb(0, 113, 61)"
-				},
-				{
-					"color" : "rgb(1, 33, 104)"
-				},
-				{
-					"color" : "rgb(68, 64, 108)"
-				},
-				{
-					"color" : "rgb(156, 52, 68)"
-				},
-				{
-					"color" : "rgb(1, 35, 122)"
 				},
 				{
 					"color" : "rgb(142, 17, 187)"
 				},
 				{
 					"color" : "rgb(221, 128, 18)"
+				},
+				{
+					"color" : "rgb(255, 255, 255)"
 				},
 				{
 					"color" : "rgb(255, 233, 206)"
@@ -534,6 +504,36 @@
 				},
 				{
 					"color" : "rgb(0, 255, 0)"
+				},
+				{
+					"color" : "rgb(0, 255, 255)"
+				},
+				{
+					"color" : "rgb(0, 0, 255)"
+				},
+				{
+					"color" : "rgb(255, 0, 255)"
+				},
+				{
+					"color" : "rgb(0, 0, 0)"
+				},
+				{
+					"color" : "rgb(0, 0, 0)"
+				},
+				{
+					"color" : "rgb(0, 0, 0)"
+				},
+				{
+					"color" : "rgb(0, 0, 0)"
+				},
+				{
+					"color" : "rgb(0, 0, 0)"
+				},
+				{
+					"color" : "rgb(0, 0, 0)"
+				},
+				{
+					"color" : "rgb(0, 0, 0)"
 				}
 			]
 		},
@@ -552,6 +552,9 @@
 		},
 		"Paste Lines Over" : {
 			"Fields" : [
+				{
+					"bool" : false
+				},
 				{
 					"bool" : false
 				},
@@ -625,16 +628,16 @@
 			"Last" : {
 				"Height" : 382,
 				"Width" : 697,
-				"X" : 531,
-				"Y" : 208
+				"X" : 288,
+				"Y" : 123
 			},
 			"Maximized" : false,
 			"Preview Text" : "Aegisub\\N0123 月語"
 		},
 		"Style Manager" : {
 			"Last" : {
-				"X" : 555,
-				"Y" : 259
+				"X" : -1,
+				"Y" : -1
 			},
 			"Maximized" : false
 		},
@@ -681,7 +684,7 @@
 	},
 	"Version" : {
 		"Last Version" : 8635,
-		"Next Check" : 1611897757
+		"Next Check" : 1636387315
 	},
 	"Video" : {
 		"Default Zoom" : 2,
@@ -694,7 +697,7 @@
 			"Maximized" : false
 		},
 		"Dummy" : {
-			"FPS" : 60.0,
+			"FPS" : 23.975999999999999,
 			"Last" : {
 				"Height" : 1080,
 				"Length" : 40000,
@@ -703,7 +706,7 @@
 			"Pattern" : false
 		},
 		"Force BT.601" : false,
-		"Last Script Resolution Mismatch Choice" : 1,
+		"Last Script Resolution Mismatch Choice" : 2,
 		"Open Audio" : true,
 		"Overscan Mask" : false,
 		"Provider" : "FFmpegSource",

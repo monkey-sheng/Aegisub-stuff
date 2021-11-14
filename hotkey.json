@@ -47,7 +47,7 @@
 		"audio/commit/default" : [
 			"G"
 		],
-		"audio/commit/stay" : [
+		"audio/commit/next" : [
 			"X"
 		],
 		"audio/play/selection" : [
