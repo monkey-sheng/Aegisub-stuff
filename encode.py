@@ -6,7 +6,8 @@ from sys import argv
 from time import sleep
 from sys import exit
 
-
+print(argv)
+# sleep(10)
 if len(argv) == 1:
     files = listdir()
     videos = [f for f in files if f.endswith(('mp4', 'mov', 'webm'))]
@@ -38,8 +39,11 @@ info = json.loads(probe.stdout)
 video_stream = list(filter(lambda s: s['codec_type'] == 'video', info['streams']))[0]
 bitrate = str(int(video_stream['bit_rate']) / 1000) + 'k'
 
-f_out = '【已压】' + video
+f_out = '【已压】' + os.path.basename(video)
 out_name = os.path.join(os.path.expanduser('~'), 'Desktop', f_out)
-print(out_name)
+# ffmpeg filters using absolute path is a nightmare with crazy escapes, change working directory instead
+ass_dir = os.path.dirname(ass)
+os.chdir(ass_dir)
+ass = os.path.basename(ass)
 run(['ffmpeg', '-i', video, '-pix_fmt', 'yuv420p', '-vf', f'subtitles={ass}', '-c:a', 'copy',
 '-c:v', 'h264_nvenc', '-b:v', bitrate, '-profile:v', 'high', '-level', '5.1', '-rc', 'vbr', '-tune', 'hq', '-rc-lookahead', '16', '-b_ref_mode', 'middle', out_name])
