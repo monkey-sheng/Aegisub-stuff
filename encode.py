@@ -37,13 +37,20 @@ probe = run(['ffprobe', '-print_format', 'json', '-show_streams', video],
 info = json.loads(probe.stdout)
 # maintain same bitrate for video stream
 video_stream = list(filter(lambda s: s['codec_type'] == 'video', info['streams']))[0]
-bitrate = str(int(video_stream['bit_rate']) / 1000) + 'k'
+bitrate = str(max(int(video_stream['bit_rate']) / 1000, 5000)) + 'k'  # at least 5000k bitrate
 
 f_out = '【已压】' + os.path.basename(video)
-out_name = os.path.join(os.path.expanduser('~'), 'Desktop', f_out)
+# ##out_name = os.path.join(os.path.expanduser('~'), 'Desktop', f_out)
+out_name = f_out
 # ffmpeg filters using absolute path is a nightmare with crazy escapes, change working directory instead
 ass_dir = os.path.dirname(ass)
-os.chdir(ass_dir)
+if ass_dir:
+    os.chdir(ass_dir)
+print(os.getcwd())
 ass = os.path.basename(ass)
-run(['ffmpeg', '-i', video, '-pix_fmt', 'yuv420p', '-vf', f'subtitles={ass}', '-c:a', 'copy',
-'-c:v', 'h264_nvenc', '-b:v', bitrate, '-profile:v', 'high', '-level', '5.1', '-rc', 'vbr', '-tune', 'hq', '-rc-lookahead', '16', '-b_ref_mode', 'middle', out_name])
+run(['ffmpeg', '-hwaccel', 'cuda', '-hwaccel_output_format', 'cuda', '-i', video, '-pix_fmt', 'yuv420p',
+    '-vf', f'subtitles={ass},setsar=1:1', '-c:a', 'copy', '-c:v', 'h264_nvenc',
+    '-b:v', bitrate, '-profile:v', 'high', '-level', '5.1', '-rc', 'vbr', '-tune', 'hq', '-rc-lookahead', '16',
+    '-b_ref_mode', 'middle', out_name])
+
+# setsar in -vf will avoid errors if SAR!=1/1
